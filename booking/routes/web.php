@@ -28,3 +28,7 @@ Route::get('/confirm_email/{id}', [App\Http\Controllers\MailController::class, '
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('profile');
 Route::post('/profile/save', [App\Http\Controllers\ProfileController::class, 'save'])->middleware('auth')->name('profile.save');
 Route::get('/reservations', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('reservations');
+//Route::get('/property', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('property');
+
+Route::resource('property', \App\Http\Controllers\PropertyController::class)->middleware('auth');
+Route::get('/test', [App\Http\Controllers\TestController::class, 'index']);

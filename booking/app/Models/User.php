@@ -37,5 +37,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'user_id', 'id');
+    }
+    public function property()
+    {
+        if($this->role=='owner'){
+        return $this->hasMany(Property::class, 'owner_id', 'id');
+    }
+    }
+
 
 }
