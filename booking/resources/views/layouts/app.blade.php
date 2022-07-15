@@ -10,7 +10,18 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+
+
+<!--
+    <script src="{{asset('assets/js/mdb.min.js')}}"></script>
+-->
+
+    <script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
+    ></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +30,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/bootstrap.min.css') }}" rel="stylesheet">
+
 </head>
 
 <div class="container-fluid">

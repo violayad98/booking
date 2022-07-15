@@ -32,3 +32,13 @@ Route::get('/reservations', [App\Http\Controllers\ProfileController::class, 'ind
 
 Route::resource('property', \App\Http\Controllers\PropertyController::class)->middleware('auth');
 Route::get('/test', [App\Http\Controllers\TestController::class, 'index']);
+
+
+Route::get('/property/category/{id}', [App\Http\Controllers\CategoryController::class, 'index'])->middleware('auth')->name('category.index');
+Route::get('/category/create/{property_id}', [App\Http\Controllers\CategoryController::class, 'create'])->middleware('auth')->name('category.create');
+Route::post('/category/store', [App\Http\Controllers\CategoryController::class, 'store'])->middleware('auth')->name('category.store');
+Route::post('/category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->middleware('auth')->name('category.update');
+Route::get('/category/photo/{id}', [App\Http\Controllers\CategoryController::class, 'photo'])->middleware('auth')->name('category.photo');
+
+Route::get('/category/show/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->middleware('auth')->name('category.show');
+Route::delete('/category/destroy/{id}/{property_id}', [App\Http\Controllers\CategoryController::class, 'destroy'])->middleware('auth')->name('category.destroy');

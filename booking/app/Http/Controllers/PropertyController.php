@@ -27,7 +27,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+               return view('property.create');
     }
 
     /**
@@ -38,7 +38,34 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'city' => 'required',
+            'street' => 'required',
+            'building' => 'required',
+            'apt' => 'required',
+            'description' => 'required',
+            'photo'=> 'required'
+        ]);
+        $property= new Property();
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'image/';
+            $profileImage = date('Y-m-d-H-m-s') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $property->photo = "$profileImage";
+        }
+        $property->name = $request->get('name');
+        $property->city = $request->get('city');
+        $property->street = $request->get('street');
+        $property->building = $request->get('building');
+        $property->apt = $request->get('apt');
+        $property->description = $request->get('description');
+        $property->owner_id = Auth::user()->id;
+
+
+        $property->save();
+        return redirect()->route('property.index')
+            ->with('success', 'updated successfully');
     }
 
     /**
@@ -110,6 +137,10 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        echo "111";
+        if(Property::destroy($id)) {
+            return redirect()->route('property.index')->with('success', 'The image has been successfully deleted!');
+        } else {
+            return redirect()->route('property.index')->with('error', 'Please try again!');
+        }
     }
 }

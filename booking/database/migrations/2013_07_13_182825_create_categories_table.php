@@ -27,6 +27,8 @@ class CreateCategoryTable extends Migration
             $table->Integer('meal_type')->nullable();
             $table->integer('stars');
             $table->decimal('grade', $precision = 8, $scale = 1);
+            $table->longText('description')->nullable();
+
             $table->timestamps();
         });
     }
