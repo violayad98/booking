@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class FeedbackController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,7 +28,8 @@ class HomeController extends Controller
     public function index()
     {
 
-        $cities =City::all();
-        return view('home',['cities'=>$cities]);
+        $feedback =Feedback::select('feedback.*')->leftJoin('reservations','reservations.id','=','feedback.reservation_id')->where('reservations.user_id',Auth::user()->id)->get();
+        return view('feedback.index',['feedback'=> $feedback]);
+
     }
 }

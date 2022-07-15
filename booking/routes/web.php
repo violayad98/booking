@@ -27,7 +27,14 @@ Route::get('/confirm_email/{id}', [App\Http\Controllers\MailController::class, '
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('profile');
 Route::post('/profile/save', [App\Http\Controllers\ProfileController::class, 'save'])->middleware('auth')->name('profile.save');
-Route::get('/reservations', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('reservations');
+Route::get('/reservations', [App\Http\Controllers\ReservationController::class, 'index'])->middleware('auth')->name('reservations');
+Route::get('/reservations/show/{id}', [App\Http\Controllers\ReservationController::class, 'show'])->middleware('auth')->name('reservations.show');
+Route::get('/reservations/cancel/{id}', [App\Http\Controllers\ReservationController::class, 'cancel'])->middleware('auth')->name('reservations.cancel');
+Route::get('/reservations/list', [App\Http\Controllers\ReservationController::class, 'list'])->middleware('auth')->name('reservations.list');
+Route::get('/reservations/confirm/{id}', [App\Http\Controllers\ReservationController::class, 'confirm'])->middleware('auth')->name('reservations.confirm');
+Route::get('/reservations/cancel_owner/{id}', [App\Http\Controllers\ReservationController::class, 'cancel_owner'])->middleware('auth')->name('reservations.cancel_owner');
+Route::get('/reservations/end/{id}', [App\Http\Controllers\ReservationController::class, 'end'])->middleware('auth')->name('reservations.end');
+
 //Route::get('/property', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('property');
 
 Route::resource('property', \App\Http\Controllers\PropertyController::class)->middleware('auth');
@@ -39,6 +46,14 @@ Route::get('/category/create/{property_id}', [App\Http\Controllers\CategoryContr
 Route::post('/category/store', [App\Http\Controllers\CategoryController::class, 'store'])->middleware('auth')->name('category.store');
 Route::post('/category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->middleware('auth')->name('category.update');
 Route::get('/category/photo/{id}', [App\Http\Controllers\CategoryController::class, 'photo'])->middleware('auth')->name('category.photo');
+Route::get('/category/photo_delete/{path}/{id}', [App\Http\Controllers\CategoryController::class, 'photo_delete'])->middleware('auth')->name('category.photo_delete');
+Route::post('/category/photo_add/{category_id}', [App\Http\Controllers\CategoryController::class, 'photo_add'])->middleware('auth')->name('category.photo_add');
 
 Route::get('/category/show/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->middleware('auth')->name('category.show');
 Route::delete('/category/destroy/{id}/{property_id}', [App\Http\Controllers\CategoryController::class, 'destroy'])->middleware('auth')->name('category.destroy');
+
+Route::get('/reservations/cancel/{id}', [App\Http\Controllers\ReservationController::class, 'cancel'])->middleware('auth')->name('feedback.new');
+
+Route::post('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
+
+Route::get('/feedback', [App\Http\Controllers\FeedbackController::class, 'index'])->middleware('auth')->name('feedback');

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\City;
 use App\Models\Property;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
@@ -27,7 +31,9 @@ class PropertyController extends Controller
      */
     public function create()
     {
-               return view('property.create');
+        $cities =City::all();
+
+        return view('property.create',['cities'=>$cities]);
     }
 
     /**
@@ -75,9 +81,14 @@ class PropertyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {        $cities =City::all();
+
         $property = Property::findorfail($id);
-        return view('property.show',['property'=> $property]);
+        if ($property->owner_id== Auth::user()->id) {
+            return view('property.show', ['property' => $property,'cities'=>$cities]);
+        }else{
+            return redirect()->route('property.index');
+        }
     }
 
     /**
@@ -137,10 +148,15 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        if(Property::destroy($id)) {
-            return redirect()->route('property.index')->with('success', 'The image has been successfully deleted!');
-        } else {
-            return redirect()->route('property.index')->with('error', 'Please try again!');
+        if(Property::findorfail($id)->owner_id==Auth::user()->id) {
+            if (Property::destroy($id)) {
+                Category::where('property_id',$id)->delete();
+                return redirect()->route('property.index')->with('success', 'The image has been successfully deleted!');
+            } else {
+                return redirect()->route('property.index')->with('error', 'Please try again!');
+            }
+        }    else{ return redirect()->route('property.index')->with('error', 'It is not your!');;
+
         }
     }
 }

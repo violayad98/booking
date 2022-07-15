@@ -21,11 +21,11 @@
                         </div>
                         <div class="col-12 mb-1">
                             <label for="date" class="form-label ">Місто</label>
-                            <div class=''>
-
-                                <input name="city" type="text"
-                                       class="form-control" id="city" value="{{$property->city}}" />
-                            </div>
+                            <select class="form-select select2"  name="city"  id="city" required>
+                                @foreach($cities as $city)
+                                    <option value="{{$city->id}}" {{$city->id == $property->city ?'selected':''}} >{{$city->name}}</option>
+                                @endforeach
+                            </select>
 
                         </div>
                         <div class="col-12 mb-4">

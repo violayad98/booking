@@ -28,11 +28,21 @@ class ProfileController extends Controller
     }
     public function save(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'age' => 'required',
+            'country' => 'required',
+        ]);
         $user = Auth::user();
         $user->name = $request->name;
         $user->age = $request->age;
         $user->country = $request->country;
-
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'image/';
+            $profileImage = "profile_photo_$user->id" . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $user->photo = "$profileImage";
+        }
 
         $user->save();
         return redirect('/profile');

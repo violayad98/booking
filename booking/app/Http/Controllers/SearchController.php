@@ -6,7 +6,7 @@ use App\Models\City;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class HomeController extends Controller
+class SearchController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $cities =City::all();
-        return view('home',['cities'=>$cities]);
+       /* $cities =City::all();
+        return view('home',['cities'=>$cities]);*/
     }
 }

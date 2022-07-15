@@ -14,14 +14,14 @@
         <div class="card">
             <div class="card-header text-center"><h1>Профіль</h1></div>
     <form id="contact" action="{{ route('profile.save') }}" method="post"
-          class=' form-group col-12 p-5'>
+          class=' form-group col-12 p-5' enctype="multipart/form-data">
         <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
         <div class="row">
             <div class="col-12 mb-1">
                 <label for="city" class="form-label ">Ім'я</label>
                 <div class=' '>
-						 <input name="name" type="text"
-                                                                              class="form-control" id="name" value="{{Auth::user()->name}}"
+						 <input name="name" type="text" required
+                                class="form-control" id="name" value="{{Auth::user()->name}}"
                                                                               />
                 </div>
 
@@ -30,7 +30,7 @@
                 <label for="date" class="form-label ">Вік</label>
                 <div class=''>
 
-                    <input name="age" type="number"
+                    <input name="age" type="number" required
                            class="form-control" id="age" value="{{Auth::user()->age}}" />
                 </div>
 
@@ -39,13 +39,21 @@
 
                 <label for="adult" class="form-label ">Країна</label>
                 <div class=''>
-						<input name="country" type="text"
+						<input name="country" type="text" required
                                                                               class="form-control" id="country"value="{{Auth::user()->country}}"
                     />
                 </div>
 
             </div>
+            @if(Auth::user()->photo)
+            <div class="text-center">
+                <img src="/image/{{ Auth::user()->photo }}" width="300px"></div>
+            @endif
+            <div class="form-group">
+                <label for="formFile" class="form-label mt-4">Нове фото профілю</label>
+                <input class="form-control" type="file" id="photo" name="photo"  @if(!Auth::user()->photo) required  @endif>
 
+            </div>
             <div style="text-align: center" class="col-12 mb-1">
 
 

@@ -15,31 +15,47 @@
 
         </div>
     </div>
-    <form id="contact" action="" method="post"
+    <form id="contact" action="{{ route('search') }}" method="post"
           class=' form-group col-12 p-5'>
+        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+
         <div class="row">
             <div class="col-lg-3 col-md-6 mb-1">
                 <label for="city" class="form-label ">Місто</label>
                 <div class='input-group '>
-						<span class="input-group-text"><i
-                                class="bi bi-geo-alt-fill"></i></span> <input name="city" type="text"
-                                                                              class="form-control" id="city"
-                                                                              placeholder="Куди ви хочете поїхати?" required="" />
+						<span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+</svg></span> <select
+                        class="form-select" id="city" name='city'       required>
+                        <option value="" ></option>
+
+                        @foreach($cities as $city)
+                            <option value="{{$city->id}}" >{{$city->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
+
             </div>
-            <div class="col-lg-3 col-md-6 mb-1">
-                <label for="date" class="form-label ">Дати</label>
-                <div class='input-group '>
-                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                    <input name="date" type="text"
+            <div class="col-lg-2 col-md-6 mb-1">
+                <label for="date" class="form-label ">Заїзд</label>
+
+                    <input name="date" type="date"  min="{{\Carbon\Carbon::now()->format('Y-m-d')}}" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}"
                            class="form-control" id="date" placeholder="Заїзд-Виїзд" />
-                </div>
+
+            </div>
+            <div class="col-lg-2 col-md-6 mb-1">
+                <label for="date" class="form-label ">Виїзд</label>
+
+
+                    <input name="date" type="date" value="{{\Carbon\Carbon::tomorrow()->format('Y-m-d')}}"
+                           class="form-control" id="date"  />
+
 
             </div>
             <div class="col-lg-2 col-md-4 mb-1">
 
-                <label for="adult" class="form-label ">Дорослих</label>
+                <label for="adult" class="form-label ">Людей</label>
                 <select
                     class="form-select" id="adult" name='adult'>
 
@@ -51,18 +67,7 @@
                 </select>
 
             </div>
-            <div class="col-lg-2 col-md-4 mb-3">
-                <label for="kids" class="form-label ">Дітей</label> <select
-                    class="form-select" id="kids" name='kids'>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
 
-            </div>
             <div style="text-align: center" class="col-lg-2 col-md-4 mb-1">
 
 

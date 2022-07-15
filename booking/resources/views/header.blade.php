@@ -33,7 +33,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('reservations') }}">Мої бронювання</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('feedback') }}">Мої відгуки</a>
+                    </li>
                     @if(Auth::user()->role =='owner')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('reservations.list') }}">Бронювання об'єктів</a>
+                        </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('property.index') }}">Мої об'єкти</a>
                             </li>

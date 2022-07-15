@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Category extends Model
@@ -16,8 +17,18 @@ class Category extends Model
     ];
     public function property()
     {
-        return $this-belongsTo(Property::class, 'id', 'property_id');
+        return $this->belongsTo(Property::class, 'property_id', 'id');
     }
+    public function reservation()
+    {
+        return $this-hasMany(Reservation::class, 'id', 'property_id');
+    }
+    public function get_owner()
+    {
+        $owner=DB::table('properties')->select('owner_id')->where('id',$this->property_id)->first();
+        return $owner->owner_id;
+    }
+
     public function get_photo()
     {
        return DB::table('photo_to_category')->where('category_id',$this->id)->get();
@@ -34,4 +45,6 @@ class Category extends Model
     {
         return DB::table('bed_types')->where('id',$this->bed_type)->first();
     }
+
+
 }

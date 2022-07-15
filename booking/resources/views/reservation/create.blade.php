@@ -12,27 +12,26 @@
                         <div class="col-12 mb-1">
                             <label for="city" class="form-label ">Назва</label>
                             <div class=' '>
-                                <input name="name" type="text" required
+                                <input name="name" type="text"
                                        class="form-control" id="name"
                                 />
                             </div>
 
                         </div>
                         <div class="col-12 mb-1">
-                            <label for="city" class="form-label ">Місто</label>
-                            <select class="form-select"  name="city"  id="city" required>
-                                <option ></option>
-                                @foreach($cities as $city)
-                                    <option value="{{$city->id}}">{{$city->name}}</option>
-                                @endforeach
-                            </select>
+                            <label for="date" class="form-label ">Місто</label>
+                            <div class=''>
+
+                                <input name="city" type="text"
+                                       class="form-control" id="city"  />
+                            </div>
 
                         </div>
                         <div class="col-12 mb-4">
 
                             <label for="adult" class="form-label ">Вулиця</label>
                             <div class=''>
-                                <input name="street" type="text" required
+                                <input name="street" type="text"
                                        class="form-control" id="street"
                                 />
                             </div>
@@ -42,7 +41,7 @@
 
                             <label for="adult" class="form-label ">Будівля</label>
                             <div class=''>
-                                <input name="building" type="text" required
+                                <input name="building" type="text"
                                        class="form-control" id="building"
                                 />
                             </div>
@@ -52,7 +51,7 @@
 
                             <label for="adult" class="form-label ">Квартира</label>
                             <div class=''>
-                                <input name="apt" type="text" required
+                                <input name="apt" type="text"
                                        class="form-control" id="apt"
                                 />
                             </div>
@@ -63,7 +62,7 @@
 
                             <label for="adult" class="form-label ">Опис об'єкту</label>
                             <div class=''>
-                                <input name="description" type="text" required
+                                <input name="description" type="text"
                                        class="form-control" id="description"
                                 />
                             </div>
@@ -72,7 +71,7 @@
                         <div class="text-center">
                         <div class="form-group">
                             <label for="formFile" class="form-label mt-4">Головне фото об'єкта</label>
-                            <input class="form-control" type="file" id="photo" name="photo" required >
+                            <input class="form-control" type="file" id="photo" name="photo" >
 
                         </div>
                         <div style="text-align: center" class="col-12 mb-1">

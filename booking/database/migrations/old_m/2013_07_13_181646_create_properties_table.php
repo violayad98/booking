@@ -17,12 +17,14 @@ class CreatePropertyTable extends Migration
             $table->id();
             $table->unsignedBigInteger('owner_id');
             $table->string('name');
-            $table->string('city')->nullable();
+            $table->unsignedBigInteger('city')->nullable();
             $table->string('street')->nullable();
             $table->string('building', 8)->nullable();
             $table->string('apt')->nullable();
             $table->longText('description')->nullable();
             $table->string('photo')->nullable();
+            $table->decimal('grade', $precision = 8, $scale = 1);
+
 
             $table->timestamps();
         });
