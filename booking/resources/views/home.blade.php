@@ -38,32 +38,38 @@
 
             </div>
             <div class="col-lg-2 col-md-6 mb-1">
-                <label for="date" class="form-label ">Заїзд</label>
+                <label for="date_in" class="form-label ">Заїзд</label>
 
-                    <input name="date" type="date"  min="{{\Carbon\Carbon::now()->format('Y-m-d')}}" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}"
-                           class="form-control" id="date" placeholder="Заїзд-Виїзд" />
+                    <input name="date_in" type="date"  min="{{\Carbon\Carbon::now()->format('Y-m-d')}}" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}"
+                           class="form-control" id="date_in" placeholder="Заїзд-Виїзд" />
 
             </div>
             <div class="col-lg-2 col-md-6 mb-1">
-                <label for="date" class="form-label ">Виїзд</label>
+                <label for="date_out" class="form-label ">Виїзд</label>
 
 
-                    <input name="date" type="date" value="{{\Carbon\Carbon::tomorrow()->format('Y-m-d')}}"
-                           class="form-control" id="date"  />
+                    <input name="date_out" type="date" value="{{\Carbon\Carbon::tomorrow()->format('Y-m-d')}}"
+                           class="form-control" id="date_out"  />
 
 
             </div>
             <div class="col-lg-2 col-md-4 mb-1">
 
-                <label for="adult" class="form-label ">Людей</label>
+                <label for="person" class="form-label ">Людей</label>
                 <select
-                    class="form-select" id="adult" name='adult'>
+                    class="form-select" id="person" name='person'>
 
                     <option>1</option>
                     <option selected>2</option>
                     <option>3</option>
                     <option>4</option>
                     <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+
                 </select>
 
             </div>

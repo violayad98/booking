@@ -52,8 +52,13 @@ Route::post('/category/photo_add/{category_id}', [App\Http\Controllers\CategoryC
 Route::get('/category/show/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->middleware('auth')->name('category.show');
 Route::delete('/category/destroy/{id}/{property_id}', [App\Http\Controllers\CategoryController::class, 'destroy'])->middleware('auth')->name('category.destroy');
 
-Route::get('/reservations/cancel/{id}', [App\Http\Controllers\ReservationController::class, 'cancel'])->middleware('auth')->name('feedback.new');
+Route::get('/reservations/create/{id}', [App\Http\Controllers\FeedbackController::class, 'create'])->middleware('auth')->name('feedback.new');
 
 Route::post('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
+Route::post('/search/filter', [App\Http\Controllers\SearchController::class, 'filter'])->name('search.filter');
 
 Route::get('/feedback', [App\Http\Controllers\FeedbackController::class, 'index'])->middleware('auth')->name('feedback');
+Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'store'])->middleware('auth')->name('feedback.store');
+Route::get('/feedback/property/{id}', [App\Http\Controllers\FeedbackController::class, 'property'])->middleware('auth')->name('feedback.property');
+Route::get('/city',[\App\Http\Controllers\CityController::class,'index'])->name('city');
+

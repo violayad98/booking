@@ -14,15 +14,21 @@
             <img class='mx-auto d-block' height="200"
                  src="/image/{{ $value->photo }}">
 
-            <div class="card-body">
+            <div class="card-body text-center">
                 <p class="card-text">{{ $value->description }}</p>
+                <p class="card-text">Оцінка за відгуками {{ $value->grade }}</p>
+
                 <div class="row justify-content-center">
                 <div class="col-12 col-md-3 mb-2"><a href="{{ route('property.show', ['property'=>$value->id])}}"
                         class="btn btn-outline-primary mx-auto d-block">Редагувати</a>
 
                 </div>
                     <div class="col-12 col-md-3 mb-2"><a href="{{ route('category.index', ['id'=>$value->id])}}"
-                                          class="btn btn-outline-primary mx-auto d-block">Категорії</a>
+                                                               class="btn btn-outline-primary mx-auto d-block">Категорії</a>
+
+                    </div>
+                    <div class="col-12 col-md-3 mb-2"><a href="{{ route('feedback.property', ['id'=>$value->id])}}"
+                                                         class="btn btn-outline-primary mx-auto d-block">Відгуки</a>
 
                     </div>
 

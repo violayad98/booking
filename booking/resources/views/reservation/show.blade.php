@@ -116,7 +116,8 @@
 
                 </div>
                     @endif
-                    @if($reservation->status=='3'&& AUTH::user()->email_verified_at != NULL)
+
+                    @if($reservation->status=='3'&& AUTH::user()->email_verified_at != NULL && !$reservation->feedback)
                         <div class="col-12 col-md-3 mb-2"><a href="{{ route('feedback.new', ['id'=>$reservation->id])}}"
                                                              class="btn btn-outline-primary mx-auto d-block">Залишити відгук</a>
 

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Property;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-
+use Carbon\CarbonInterval;
+use DatePeriod;
 class CategoryController extends Controller
 {
     /**
@@ -98,6 +100,16 @@ class CategoryController extends Controller
                         'photo_path' => $Image
                     ]);
                 }
+            }
+
+
+            $period = new DatePeriod(Carbon::now(), CarbonInterval::days(), Carbon::now()->endOfYear());
+            foreach ($period as $day){
+                DB::table('desk_of_days')->insert(
+                    ['category_id' =>  $category->id,
+                        'day'=>$day,
+                        'free_room' => $category->count]
+                );
             }
 
             return redirect()->route('category.index', ['id' => $request->get('property_id')])
@@ -229,6 +241,7 @@ class CategoryController extends Controller
     {
         if(Property::findorfail($property_id)->owner_id==Auth::user()->id) {
         if (Category::destroy($id)) {
+            DB::table('desk_of_days')->where('category_id',$id)->delete();
             return redirect()->route('category.index', ['id' => $property_id])->with('success', 'The image has been successfully deleted!');
         } else {
             return redirect()->route('category.index', ['id' => $property_id])->with('error', 'Please try again!');

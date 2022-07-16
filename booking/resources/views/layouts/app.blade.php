@@ -41,21 +41,20 @@
     <link href="{{ asset('assets/bootstrap.min.css') }}" rel="stylesheet">
 
 </head>
-
+<body>
 <div class="container-fluid">
+<!--
     <div id="app">
+-->
        @include('header')
 
         <main class="py-4">
             @yield('content')
         </main>
+<!--
     </div>
+-->
 </div>
 </body>
 </html>
-<script>
-    import HeaderComponents from "../../js/components/Header-components";
-    export default {
-        components: {HeaderComponents}
-    }
-</script>
+

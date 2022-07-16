@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @if(sizeof($reservations)== 0)
+        <div class="text-center"><h5>Бронювань поки немає</h5></div>
+    @endif
     @foreach($reservations as $key => $value)
         <div class="card   col-12 mb-4">
 

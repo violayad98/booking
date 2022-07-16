@@ -40,6 +40,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('reservations.list') }}">Бронювання об'єктів</a>
                         </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('property.index') }}">Мої об'єкти</a>
                             </li>

@@ -28,9 +28,8 @@ Vue.component('hotel-component', require('./components/HotelComponent.vue').defa
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import axios from "axios";
 
-const app = new Vue({
-    el: '#app',
+const search_list_app = new Vue({
+    el: '#search_list_app',
 });
 

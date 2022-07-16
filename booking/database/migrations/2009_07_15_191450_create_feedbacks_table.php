@@ -17,7 +17,9 @@ class CreateFeedbackTable extends Migration
             $table->id();
             $table->bigInteger('reservation_id');
             $table->decimal('grade', $precision = 8, $scale = 1);
-            $table->string('description');
+            $table->string('name');
+
+            $table->text('description');
 
             $table->timestamps();
         });

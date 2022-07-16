@@ -2,6 +2,10 @@
 
 @section('content')
 
+    @if(sizeof($feedback)== 0)
+        <div class="text-center"><h5>Відгуків поки немає</h5></div>
+        @endif
+
     @foreach($feedback as $key => $value)
         <div class="card   col-12 mb-4">
 
@@ -23,6 +27,10 @@
                         <div class="col-12 col-xs-8 col-md-4">
                             <table class="table">
                                 <tr>
+                                    <td>Назва</td>
+                                    <td>{{ $value->name }}</td>
+                                </tr>
+                                <tr>
                                     <td>Відгук</td>
                                     <td>{{ $value->description }}</td>
                                 </tr>
@@ -43,6 +51,8 @@
 
             <div class="card-footer text-muted">Створено {{ $value->created_at }}</div>
         </div>
+        </div>
+
 
 
     @endforeach
