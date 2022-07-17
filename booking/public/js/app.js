@@ -28526,7 +28526,7 @@ var render = function () {
                   staticClass: "form-check-input",
                   attrs: {
                     type: "checkbox",
-                    name: "bed_type",
+                    name: "facilities",
                     id: "flexCheckChecked",
                   },
                   domProps: {

@@ -80,7 +80,7 @@
                     <legend class="mt-4">Зручності</legend>
 
                     <div class="form-check" v-for="val1 in facilities">
-                        <input class="form-check-input" type="checkbox" :value="val1.id" name="bed_type" v-model="filter.facilities_type" @change="search"
+                        <input class="form-check-input" type="checkbox" :value="val1.id" name="facilities" v-model="filter.facilities_type" @change="search"
                                id="flexCheckChecked" > <label
                         class="form-check-label" >{{val1.name}}</label>
                     </div>

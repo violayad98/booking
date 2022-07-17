@@ -32,8 +32,8 @@ class PropertyController extends Controller
     public function create()
     {
         $cities =City::all();
-
-        return view('property.create',['cities'=>$cities]);
+        $facilities= DB::table('facilities')->get();
+        return view('property.create',['cities'=>$cities,'facilities'=>$facilities]);
     }
 
     /**
@@ -68,8 +68,16 @@ class PropertyController extends Controller
         $property->description = $request->get('description');
         $property->owner_id = Auth::user()->id;
 
-
         $property->save();
+
+        foreach ($request->facilities as $facility){
+            DB::table('facilities_to_property')->insert(
+                ['property_id' =>  $property->id,
+                    'facility_id'=>$facility]
+            );
+        }
+
+
         return redirect()->route('property.index')
             ->with('success', 'updated successfully');
     }
@@ -82,10 +90,11 @@ class PropertyController extends Controller
      */
     public function show($id)
     {        $cities =City::all();
+        $facilities= DB::table('facilities')->get();
 
         $property = Property::findorfail($id);
         if ($property->owner_id== Auth::user()->id) {
-            return view('property.show', ['property' => $property,'cities'=>$cities]);
+            return view('property.show', ['property' => $property,'cities'=>$cities,'facilities'=>$facilities]);
         }else{
             return redirect()->route('property.index');
         }
@@ -136,6 +145,14 @@ class PropertyController extends Controller
         $property->description = $request->get('description');
         $property->save();
 
+        DB::table('facilities_to_property')->where('property_id',$id)->delete();
+
+        foreach ($request->facilities as $facility){
+            DB::table('facilities_to_property')->insert(
+                ['property_id' =>  $property->id,
+                    'facility_id'=>$facility]
+            );
+        }
         return redirect()->route('property.index')
             ->with('success', 'updated successfully');
     }

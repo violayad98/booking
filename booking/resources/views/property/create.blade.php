@@ -69,6 +69,18 @@
                             </div>
 
                         </div>
+                        <div class="col-12 mb-4">
+                        <label for="adult" class="form-label ">Зручності</label>
+                        @foreach($facilities as $value)
+                        <div class="form-check" >
+
+                            <input class="form-check-input" type="checkbox" value='{{$value->id}}' name="facilities[]"
+                                   id="flexCheckChecked" > <label
+                                class="form-check-label" >{{$value->name}}</label>
+
+
+                        </div>  @endforeach
+                        </div>
                         <div class="text-center">
                         <div class="form-group">
                             <label for="formFile" class="form-label mt-4">Головне фото об'єкта</label>
