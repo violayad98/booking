@@ -140,9 +140,7 @@
                             class="form-check-label" >Будь-яка</label>
                     </div>
                     <!-- ------------------------------------------------------ -->
-                    <button type="submit"
-                            class="btn btn-outline-primary mx-auto d-block">Пошук
-                    </button>
+                    
                 </form>
             </div>
         </div>

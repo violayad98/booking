@@ -21,7 +21,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Auth::user()->reservations->sortBy('status');
+        $reservations = Auth::user()->reservations->sortBy('status')->sortByDesc('check_in');
         return view('reservation.index',['reservations'=> $reservations]);
     }
     public function list()

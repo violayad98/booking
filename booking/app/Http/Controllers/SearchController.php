@@ -79,7 +79,6 @@ class SearchController extends Controller
 
             }
         }
-
         $res = Property::select('properties.*', DB::raw('MIN(categories.price_per_night) as price_per_night'), 'categories.property_id', 'categories.stars')
             ->crossJoin('categories', 'categories.property_id', 'properties.id')->groupBy('categories.property_id')
             ->havingRaw('MIN(categories.price_per_night)')
@@ -101,7 +100,7 @@ class SearchController extends Controller
                 return $q->whereIn('categories.stars', $filter['stars']);
             })
             ->when($filter['grade'] != '', static function ($q) use ($filter) {
-                return $q->where('stars', '>', $filter['grade']);
+                return $q->where('grade', '>=', $filter['grade']);
             })
             ->when($filter['sort'] != '', static function ($q) use ($filter) {
                 if ($filter['sort'] == '1') {

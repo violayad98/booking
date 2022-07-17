@@ -5273,8 +5273,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['contrdata'],
   data: function data() {
@@ -28991,15 +28989,6 @@ var render = function () {
                 _vm._v("Будь-яка"),
               ]),
             ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary mx-auto d-block",
-                attrs: { type: "submit" },
-              },
-              [_vm._v("Пошук\n                    ")]
-            ),
           ],
           2
         ),
