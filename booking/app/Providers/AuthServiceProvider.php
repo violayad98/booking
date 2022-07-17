@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\User;
+use App\Policies\PropertyPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use phpDocumentor\Reflection\Types\True_;
 
@@ -16,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
+      //  Category::class => PropertyPolicy::class,
     ];
 
     /**
@@ -26,13 +30,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        //Gate;
-            Gate::define('owner',function (User $user){
-                if ($user->role =='owner'){
-                    return true;
+
+        Gate::define('owner', function (?User $user) {
+            if (Auth::user()->role == 'owner') {
+                return true;
 
             }
-        //
-    });
-}
+
+            // });
+        });
+    }
 }

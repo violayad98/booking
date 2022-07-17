@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Property;
 use App\Http\Resources\CityResource;
+use Illuminate\Support\Facades\DB;
 
 class TypeController extends Controller
 {
@@ -26,9 +27,23 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function meal()
     {
-        return CityResource::collection(City::all());
+        $meal_types = DB::table('meal_types')->get();
+
+        return CityResource::collection($meal_types);
         }
+    public function property()
+    {
+        $property_types = DB::table('property_types')->get();
+
+        return CityResource::collection($property_types);
+    }
+    public function bed()
+    {
+
+        $bed_types = DB::table('bed_types')->get();
+        return CityResource::collection($bed_types);
+    }
 
 }

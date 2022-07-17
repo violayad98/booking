@@ -11,8 +11,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Carbon\CarbonInterval;
 use DatePeriod;
+use App\Providers\AuthServiceProvider;
+use Illuminate\Support\Facades\Gate;
 class CategoryController extends Controller
+
 {
+    public function __construct()
+    {
+   }
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +26,7 @@ class CategoryController extends Controller
      */
     public function index($property_id)
     {
+        Gate::authorize('owner');
         $category = Category::select('categories.*')->leftjoin('properties', 'properties.id', '=', 'categories.property_id')->where('property_id', $property_id)->where('owner_id', Auth::user()->id)->get();
         foreach ($category as $cat) {
             $cat->photo = $cat->get_photo();

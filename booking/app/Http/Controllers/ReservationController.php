@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Property;
 use App\Models\Reservation;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use DatePeriod;
 
 class ReservationController extends Controller
 {
@@ -17,7 +21,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Auth::user()->reservations;
+        $reservations = Auth::user()->reservations->sortBy('status');
         return view('reservation.index',['reservations'=> $reservations]);
     }
     public function list()
@@ -67,9 +71,36 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id, $date_in, $date_out, $person)
     {
-        //
+        $diff = Carbon::parse($date_in)->diffInDays(Carbon::parse($date_out));
+        $category=Category::findorfail($id);
+        $reservation= new Reservation();
+
+        $reservation->user_id = Auth::user()->id;
+        $reservation->category_id = $id;
+        $reservation->check_in = $date_in;
+        $reservation->check_out = $date_out;
+        $reservation->amount = $category->price_per_night*$diff;
+        $reservation->status ='1';
+        $reservation->person = $person;
+        //$reservation->save();
+
+        $period = new DatePeriod( Carbon::parse($date_in), CarbonInterval::days(),  Carbon::parse($date_out));
+        print_r($period);
+        foreach ($period as $day){
+            $free=DB::table('desk_of_days')->select('free_room')
+                ->where('day',$day)
+                ->where('category_id',$id)->first();
+            $val=$free->free_room-1;
+            $free1=DB::table('desk_of_days')
+                ->where('day',$day)
+                ->where('category_id',$id)->update(['free_room'=>$val]);
+            //echo $free1->free_room;
+        }
+        return redirect()->route('reservations')
+            ->with('success', 'updated successfully');
+
     }
 
     /**

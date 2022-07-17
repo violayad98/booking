@@ -56,9 +56,15 @@
                         </tr>
                     </table>
                     @if($value->status=='1')
+                        <div class="row">
                         <div class="col-12 col-md-6 mb-2"><a
                                 href="{{ route('reservations.confirm', ['id'=>$value->id])}}"
                                 class="btn btn-outline-success mx-auto d-block">Підтвердити</a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2"><a
+                                href="{{ route('reservations.cancel_owner', ['id'=>$value->id])}}"
+                                class="btn btn-outline-dark mx-auto d-block">Відмінити</a>
+                        </div>
                         </div>
                     @elseif($value->status=='2')
                         <div class="row">

@@ -5170,22 +5170,116 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['contrdata'],
   data: function data() {
     return {
       hotels: [],
       fields: {},
-      cities: null
+      meal: null,
+      property: null,
+      bed: null,
+      filter: {
+        property_type: [],
+        meal_type: [],
+        bed_type: [],
+        stars: [],
+        grade: '',
+        sort: ''
+      }
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/city').then(function (res) {
-      _this.cities = res.data.data;
+    axios.get('/type/meal').then(function (res) {
+      _this.meal = res.data.data;
     });
-    console.log(this.contrdata);
+    axios.get('/type/property').then(function (res) {
+      _this.property = res.data.data;
+    });
+    axios.get('/type/bed').then(function (res) {
+      _this.bed = res.data.data;
+    });
     this.search();
   },
   methods: {
@@ -5196,6 +5290,7 @@ __webpack_require__.r(__webpack_exports__);
       this.fields.date_in = this.contrdata.date_in;
       this.fields.date_out = this.contrdata.date_out;
       this.fields.person = this.contrdata.person;
+      this.fields.filter = this.filter;
       axios.post('/search/filter', this.fields).then(function (res) {
         console.log(res.data);
         _this2.hotels = res.data.data;
@@ -27973,19 +28068,672 @@ var render = function () {
             },
           },
           [
-            _c("h5", { staticClass: "text-center mb-1" }, [
-              _vm._v("Сортувати за такими критеріями:"),
+            _c("legend", { staticClass: "mt-" }, [_vm._v("Сортувати за :")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.sort,
+                    expression: "filter.sort",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "sort", value: "1" },
+                domProps: { checked: _vm._q(_vm.filter.sort, "1") },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.filter, "sort", "1")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Ціною↑ "),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.sort,
+                    expression: "filter.sort",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "sort", value: "2" },
+                domProps: { checked: _vm._q(_vm.filter.sort, "2") },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.filter, "sort", "2")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Ціною↓ "),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.sort,
+                    expression: "filter.sort",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "sort", value: "3" },
+                domProps: { checked: _vm._q(_vm.filter.sort, "3") },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.filter, "sort", "3")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Кількістю зірок"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.sort,
+                    expression: "filter.sort",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "sort", value: "4" },
+                domProps: { checked: _vm._q(_vm.filter.sort, "4") },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.filter, "sort", "4")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("За рейтингом"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("h5", { staticClass: "text-center mt-4" }, [
+              _vm._v("Фільтрувати за такими критеріями:"),
             ]),
             _vm._v(" "),
             _c("legend", { staticClass: "mt-4" }, [_vm._v("Тип помешкання")]),
             _vm._v(" "),
-            _vm._m(0),
+            _vm._l(_vm.property, function (val) {
+              return _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.filter.property_type,
+                      expression: "filter.property_type",
+                    },
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: {
+                    type: "checkbox",
+                    name: "property_type",
+                    id: "property_type",
+                  },
+                  domProps: {
+                    value: val.id,
+                    checked: Array.isArray(_vm.filter.property_type)
+                      ? _vm._i(_vm.filter.property_type, val.id) > -1
+                      : _vm.filter.property_type,
+                  },
+                  on: {
+                    change: function ($event) {
+                      var $$a = _vm.filter.property_type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = val.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.filter,
+                              "property_type",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.filter,
+                              "property_type",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.filter, "property_type", $$c)
+                      }
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "form-check-label" }, [
+                  _vm._v(_vm._s(val.name)),
+                ]),
+              ])
+            }),
             _vm._v(" "),
-            _vm._m(1),
+            _c("legend", { staticClass: "mt-4" }, [_vm._v("Тип ліжка")]),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._l(_vm.bed, function (val1) {
+              return _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.filter.bed_type,
+                      expression: "filter.bed_type",
+                    },
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: {
+                    type: "checkbox",
+                    name: "bed_type",
+                    id: "flexCheckChecked",
+                  },
+                  domProps: {
+                    value: val1.id,
+                    checked: Array.isArray(_vm.filter.bed_type)
+                      ? _vm._i(_vm.filter.bed_type, val1.id) > -1
+                      : _vm.filter.bed_type,
+                  },
+                  on: {
+                    change: function ($event) {
+                      var $$a = _vm.filter.bed_type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = val1.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.filter, "bed_type", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.filter,
+                              "bed_type",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.filter, "bed_type", $$c)
+                      }
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "form-check-label" }, [
+                  _vm._v(_vm._s(val1.name)),
+                ]),
+              ])
+            }),
             _vm._v(" "),
-            _vm._m(3),
+            _c("legend", { staticClass: "mt-4" }, [_vm._v("Тип харчування")]),
+            _vm._v(" "),
+            _vm._l(_vm.meal, function (val) {
+              return _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.filter.meal_type,
+                      expression: "filter.meal_type",
+                    },
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: {
+                    type: "checkbox",
+                    name: "meal_type",
+                    id: "flexCheckChecked",
+                  },
+                  domProps: {
+                    value: val.id,
+                    checked: Array.isArray(_vm.filter.meal_type)
+                      ? _vm._i(_vm.filter.meal_type, val.id) > -1
+                      : _vm.filter.meal_type,
+                  },
+                  on: {
+                    change: function ($event) {
+                      var $$a = _vm.filter.meal_type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = val.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.filter, "meal_type", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.filter,
+                              "meal_type",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.filter, "meal_type", $$c)
+                      }
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "form-check-label" }, [
+                  _vm._v(_vm._s(val.name)),
+                ]),
+              ])
+            }),
+            _vm._v(" "),
+            _c("legend", { staticClass: "mt-4" }, [_vm._v("Кількість зірок")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.stars,
+                    expression: "filter.stars",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  value: "1",
+                  name: "",
+                  id: "flexCheckChecked",
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.filter.stars)
+                    ? _vm._i(_vm.filter.stars, "1") > -1
+                    : _vm.filter.stars,
+                },
+                on: {
+                  change: function ($event) {
+                    var $$a = _vm.filter.stars,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "1",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.filter,
+                            "stars",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.filter, "stars", $$c)
+                    }
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [_vm._v("1")]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.stars,
+                    expression: "filter.stars",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  value: "2",
+                  name: "",
+                  id: "flexCheckChecked",
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.filter.stars)
+                    ? _vm._i(_vm.filter.stars, "2") > -1
+                    : _vm.filter.stars,
+                },
+                on: {
+                  change: function ($event) {
+                    var $$a = _vm.filter.stars,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "2",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.filter,
+                            "stars",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.filter, "stars", $$c)
+                    }
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [_vm._v("2")]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.stars,
+                    expression: "filter.stars",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  value: "3",
+                  name: "",
+                  id: "flexCheckChecked",
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.filter.stars)
+                    ? _vm._i(_vm.filter.stars, "3") > -1
+                    : _vm.filter.stars,
+                },
+                on: {
+                  change: function ($event) {
+                    var $$a = _vm.filter.stars,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "3",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.filter,
+                            "stars",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.filter, "stars", $$c)
+                    }
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [_vm._v("3")]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.stars,
+                    expression: "filter.stars",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  value: "4",
+                  name: "",
+                  id: "flexCheckChecked",
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.filter.stars)
+                    ? _vm._i(_vm.filter.stars, "4") > -1
+                    : _vm.filter.stars,
+                },
+                on: {
+                  change: function ($event) {
+                    var $$a = _vm.filter.stars,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "4",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.filter,
+                            "stars",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.filter, "stars", $$c)
+                    }
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [_vm._v("4")]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.stars,
+                    expression: "filter.stars",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  value: "5",
+                  name: "",
+                  id: "flexCheckChecked",
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.filter.stars)
+                    ? _vm._i(_vm.filter.stars, "5") > -1
+                    : _vm.filter.stars,
+                },
+                on: {
+                  change: function ($event) {
+                    var $$a = _vm.filter.stars,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "5",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.filter,
+                            "stars",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.filter, "stars", $$c)
+                    }
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [_vm._v("5")]),
+            ]),
+            _vm._v(" "),
+            _c("legend", { staticClass: "mt-4" }, [
+              _vm._v("Оцінка за відгуками"),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.grade,
+                    expression: "filter.grade",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "grade", value: "9" },
+                domProps: { checked: _vm._q(_vm.filter.grade, "9") },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.filter, "grade", "9")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Відмінно 9+"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.grade,
+                    expression: "filter.grade",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "grade", value: "8" },
+                domProps: { checked: _vm._q(_vm.filter.grade, "8") },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.filter, "grade", "8")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Дуже добре 8+"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.grade,
+                    expression: "filter.grade",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "grade", value: "7" },
+                domProps: { checked: _vm._q(_vm.filter.grade, "7") },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.filter, "grade", "7")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Добре 7+"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.grade,
+                    expression: "filter.grade",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "grade", value: "6" },
+                domProps: { checked: _vm._q(_vm.filter.grade, "6") },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.filter, "grade", "6")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Досить добре 6+"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.grade,
+                    expression: "filter.grade",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "grade", value: "0" },
+                domProps: { checked: _vm._q(_vm.filter.grade, "0") },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.filter, "grade", "0")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Будь-яка"),
+              ]),
+            ]),
             _vm._v(" "),
             _c(
               "button",
@@ -27995,7 +28743,8 @@ var render = function () {
               },
               [_vm._v("Пошук\n                    ")]
             ),
-          ]
+          ],
+          2
         ),
       ]),
     ]),
@@ -28032,22 +28781,33 @@ var render = function () {
             _c("div", { staticClass: "col-md-4" }, [
               _c("table", { staticClass: "table" }, [
                 _c("tr", [
-                  _vm._m(4, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("td", [_c("h5", [_vm._v(_vm._s(hotel.stars))])]),
                 ]),
                 _vm._v(" "),
                 _c("tr", [
-                  _vm._m(5, true),
+                  _vm._m(1, true),
                   _vm._v(" "),
                   _c("td", [_c("h5", [_vm._v(" " + _vm._s(hotel.grade))])]),
                 ]),
               ]),
               _c(
-                "button",
+                "a",
                 {
                   staticClass: "btn btn-outline-primary mx-auto d-block",
-                  attrs: { type: "button" },
+                  attrs: {
+                    type: "button",
+                    href:
+                      "search/show/" +
+                      hotel.id +
+                      "/" +
+                      _vm.fields.date_in +
+                      "/" +
+                      _vm.fields.date_out +
+                      "/" +
+                      _vm.fields.person,
+                  },
                 },
                 [
                   _vm._v(
@@ -28066,94 +28826,6 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-check" }, [
-      _c("input", {
-        staticClass: "form-check-input",
-        attrs: {
-          type: "checkbox",
-          value: "",
-          id: "flexCheckChecked",
-          checked: "",
-        },
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "form-check-label", attrs: { for: "flexCheckChecked" } },
-        [_vm._v(" Апартаменти")]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-check" }, [
-      _c("input", {
-        staticClass: "form-check-input",
-        attrs: {
-          type: "checkbox",
-          value: "",
-          id: "flexCheckChecked",
-          checked: "",
-        },
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "form-check-label", attrs: { for: "flexCheckChecked" } },
-        [_vm._v(" Готелі")]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-check" }, [
-      _c("input", {
-        staticClass: "form-check-input",
-        attrs: {
-          type: "checkbox",
-          value: "",
-          id: "flexCheckChecked",
-          checked: "",
-        },
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "form-check-label", attrs: { for: "flexCheckChecked" } },
-        [_vm._v(" Хостели")]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-check" }, [
-      _c("input", {
-        staticClass: "form-check-input",
-        attrs: {
-          type: "checkbox",
-          value: "",
-          id: "flexCheckChecked",
-          checked: "",
-        },
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "form-check-label", attrs: { for: "flexCheckChecked" } },
-        [_vm._v(" Гостьові будинки")]
-      ),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
