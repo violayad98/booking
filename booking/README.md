@@ -11,7 +11,7 @@ php version must be 7.2 and more
 8)Set Mail(my or yours)
 9)Run Wamp and open link "http://localhost/phpmyadmin/" and create database
 10)Run "php artisan migrate"
-10)Run "php artisan seed"
+10)Run "php artisan db:seed"
 11)Run "php artisan serve"
 
 set at .env
