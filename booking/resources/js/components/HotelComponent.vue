@@ -13,32 +13,51 @@
                     <legend class="mt- ">Сортувати за :</legend>
 
                     <div class="form-check" >
-                        <input type="radio" class="form-check-input" name="sort"  value="1" v-model="filter.sort" >
+                        <input type="radio" class="form-check-input" name="sort"  value="1" v-model="filter.sort" @change="search">
                         <label
                             class="form-check-label" >Ціною↑ </label>
                     </div>
                     <div class="form-check" >
-                        <input type="radio" class="form-check-input" name="sort"  value="2" v-model="filter.sort" >
+                        <input type="radio" class="form-check-input" name="sort"  value="2" v-model="filter.sort" @change="search">
                         <label
                             class="form-check-label" >Ціною↓ </label>
                     </div>
+
                     <div class="form-check" >
-                        <input type="radio" class="form-check-input" name="sort"  value="3" v-model="filter.sort" >
-                        <label
-                            class="form-check-label" >Кількістю зірок</label>
-                    </div>
-                    <div class="form-check" >
-                        <input type="radio" class="form-check-input" name="sort"  value="4" v-model="filter.sort" >
+                        <input type="radio" class="form-check-input" name="sort"  value="3" v-model="filter.sort" @change="search">
                         <label
                             class="form-check-label" >За рейтингом</label>
                     </div>
 
                     <h5 class="text-center  mt-4">Фільтрувати за такими критеріями:</h5>
 
+                    <legend class="mt-4">Ціна за ніч</legend>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="75" name="price" v-model="filter.price" @change="search"
+                               id="price" > <label
+                        class="form-check-label" >До 75₴</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="150" name="price" v-model="filter.price" @change="search"
+                               id="price" > <label
+                        class="form-check-label" >До 150₴</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="300" name="price" v-model="filter.price" @change="search"
+                               id="price" > <label
+                        class="form-check-label" >До 300₴</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="" name="price" v-model="filter.price" @change="search"
+                               id="price" > <label
+                        class="form-check-label" >Будь-яка</label>
+                    </div>
+
                     <legend class="mt-4">Тип помешкання</legend>
 
                     <div class="form-check" v-for="val in property">
-                        <input class="form-check-input" type="checkbox" :value="val.id" name="property_type" v-model="filter.property_type"
+                        <input class="form-check-input" type="checkbox" :value="val.id" name="property_type" v-model="filter.property_type" @change="search"
                                id="property_type" > <label
                         class="form-check-label" >{{val.name}}</label>
                     </div>
@@ -46,7 +65,7 @@
                     <legend class="mt-4">Тип ліжка</legend>
 
                     <div class="form-check" v-for="val1 in bed">
-                        <input class="form-check-input" type="checkbox" :value="val1.id" name="bed_type" v-model="filter.bed_type"
+                        <input class="form-check-input" type="checkbox" :value="val1.id" name="bed_type" v-model="filter.bed_type" @change="search"
                                id="flexCheckChecked" > <label
                         class="form-check-label" >{{val1.name}}</label>
                     </div>
@@ -54,62 +73,69 @@
                     <legend class="mt-4">Тип харчування</legend>
 
                     <div class="form-check" v-for="val in meal">
-                        <input class="form-check-input" type="checkbox" :value="val.id" name="meal_type" v-model="filter.meal_type"
+                        <input class="form-check-input" type="checkbox" :value="val.id" name="meal_type" v-model="filter.meal_type" @change="search"
                                id="flexCheckChecked" > <label
                         class="form-check-label" >{{val.name}}</label>
+                    </div>
+                    <legend class="mt-4">Зручності</legend>
+
+                    <div class="form-check" v-for="val1 in facilities">
+                        <input class="form-check-input" type="checkbox" :value="val1.id" name="bed_type" v-model="filter.facilities_type" @change="search"
+                               id="flexCheckChecked" > <label
+                        class="form-check-label" >{{val1.name}}</label>
                     </div>
                     <legend class="mt-4">Кількість зірок</legend>
 
                     <div class="form-check" >
-                        <input class="form-check-input" type="checkbox" value="1" name="" v-model="filter.stars"
+                        <input class="form-check-input" type="checkbox" value="1" name="" v-model="filter.stars" @change="search"
                                id="flexCheckChecked" > <label
                         class="form-check-label" >1</label>
                     </div>
                     <div class="form-check" >
-                    <input class="form-check-input" type="checkbox" value="2" name="" v-model="filter.stars"
+                    <input class="form-check-input" type="checkbox" value="2" name="" v-model="filter.stars" @change="search"
                                id="flexCheckChecked" > <label
                         class="form-check-label">2</label></div>
                     <div class="form-check" >
 
-            <input class="form-check-input" type="checkbox" value="3" name="" v-model="filter.stars"
+            <input class="form-check-input" type="checkbox" value="3" name="" v-model="filter.stars" @change="search"
                                id="flexCheckChecked" > <label
                         class="form-check-label" >3</label>
                     </div>
                     <div class="form-check" >
 
-                    <input class="form-check-input" type="checkbox" value="4" name="" v-model="filter.stars"
+                    <input class="form-check-input" type="checkbox" value="4" name="" v-model="filter.stars" @change="search"
                                id="flexCheckChecked" > <label
                         class="form-check-label" >4</label>
                     </div>
                     <div class="form-check" >
-                        <input class="form-check-input" type="checkbox" value="5" name="" v-model="filter.stars"
+                        <input class="form-check-input" type="checkbox" value="5" name="" v-model="filter.stars" @change="search"
                                id="flexCheckChecked" > <label
                         class="form-check-label" >5</label>
                     </div>
                     <legend class="mt-4">Оцінка за відгуками</legend>
 
                     <div class="form-check" >
-                        <input type="radio" class="form-check-input" name="grade"  value="9" v-model="filter.grade" >
+                        <input type="radio" class="form-check-input" name="grade"  value="9" v-model="filter.grade" @change="search">
                          <label
                         class="form-check-label" >Відмінно 9+</label>
                     </div>
                     <div class="form-check" >
-                        <input type="radio" class="form-check-input" name="grade"  value="8" v-model="filter.grade" >
+                        <input type="radio" class="form-check-input" name="grade"  value="8" v-model="filter.grade" @change="search">
                         <label
                             class="form-check-label" >Дуже добре 8+</label>
                     </div>
                     <div class="form-check" >
-                        <input type="radio" class="form-check-input" name="grade"  value="7" v-model="filter.grade">
+                        <input type="radio" class="form-check-input" name="grade"  value="7" v-model="filter.grade" @change="search">
                         <label
                             class="form-check-label" >Добре 7+</label>
                     </div>
                     <div class="form-check" >
-                        <input type="radio" class="form-check-input" name="grade"  value="6" v-model="filter.grade">
+                        <input type="radio" class="form-check-input" name="grade"  value="6" v-model="filter.grade" @change="search">
                         <label
                             class="form-check-label" >Досить добре 6+</label>
                     </div>
                     <div class="form-check" >
-                        <input type="radio" class="form-check-input" name="grade"  value="0" v-model="filter.grade">
+                        <input type="radio" class="form-check-input" name="grade"  value="0" v-model="filter.grade" @change="search">
                         <label
                             class="form-check-label" >Будь-яка</label>
                     </div>
@@ -174,9 +200,11 @@ export default {
     data: () => ({
         hotels: [],
         fields: {},
+        facilities:null,
         meal: null,
         property: null,
         bed: null,
+        recalk:null,
         filter: {
             property_type: [],
             meal_type: [],
@@ -184,6 +212,9 @@ export default {
             stars:[],
             grade:'',
             sort:'',
+            price:'',
+            facilities_type: [],
+
         }
 
     }),
@@ -200,11 +231,16 @@ export default {
             .then(res => {
                 this.bed = res.data.data;
             })
+        axios.get('/type/facilities')
+            .then(res => {
+                this.facilities = res.data.data;
+            })
 
         this.search();
     },
     methods: {
         search() {
+
             this.fields.city = this.contrdata.city_id
             this.fields.date_in = this.contrdata.date_in
             this.fields.date_out = this.contrdata.date_out

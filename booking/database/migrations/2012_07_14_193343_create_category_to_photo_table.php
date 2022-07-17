@@ -27,6 +27,6 @@ class CreateCategoryToPhotoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_to_photo');
+        Schema::dropIfExists('photo_to_category');
     }
 }

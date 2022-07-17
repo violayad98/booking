@@ -45,20 +45,7 @@ class SearchController extends Controller
             'date_out' => $request->date_out,
             'person' => $request->person];
 
-        /* //$startDate = Carbon::parse($request->date_in);
-         $diff =  Carbon::parse($request->date_in)->diffInDays( Carbon::parse($request->date_out));
-         $free=DB::table('desk_of_days')
-             ->select(DB::raw('count(*) as count_free_day, category_id'))
-             ->where('free_room','>','0')
-             ->whereBetween('day',[ Carbon::parse($request->date_in), Carbon::parse($request->date_out)->subDays(1)])
-             ->groupBy('category_id')
-         ->get();
-         foreach ($free as $val){
-             if($val->count_free_day>=$diff){
-                 print_r($val);
 
-             }
-         }*/
         return view('search.index', ['res' => $data]);
 
     }
@@ -92,12 +79,15 @@ class SearchController extends Controller
 
             }
         }
-        //print_r($filter);
-        $res = Property::select('properties.*', 'categories.price_per_night', 'categories.property_id', 'categories.stars')
+
+        $res = Property::select('properties.*', DB::raw('MIN(categories.price_per_night) as price_per_night'), 'categories.property_id', 'categories.stars')
             ->crossJoin('categories', 'categories.property_id', 'properties.id')->groupBy('categories.property_id')
             ->havingRaw('MIN(categories.price_per_night)')
             ->where('categories.person_max', '>=', $request->person)
             ->whereIn('categories.id', $categories_arr)
+            ->when($filter['price'], static function ($q) use ($filter) {
+                return $q->where('categories.price_per_night','<=', $filter['price']);
+            })
             ->when(count($filter['property_type']), static function ($q) use ($filter) {
                 return $q->whereIn('categories.property_type', $filter['property_type']);
             })
@@ -119,21 +109,23 @@ class SearchController extends Controller
 
                 } elseif ($filter['sort'] == '2') {
                     return $q->orderBy('price_per_night', 'DESC');
-                } elseif ($filter['sort'] == '3') {
-                    return $q->orderBy('stars', 'DESC');
-                } elseif ($filter['sort'] == '4') {
+                }  elseif ($filter['sort'] == '3') {
                     return $q->orderBy('grade', 'DESC');
                 }
             })
             ->get();
-        /* foreach ($res as $value){
-             print_r($value->property_id.'  ');
-         }*/
 
 
-        $data = [];
-        //return view('search.index',['res' => $data]);
+        foreach ($res as $key=>$item) {
+            //print_r();
+            foreach ($filter['facilities_type'] as $facility) {
+                if(!in_array($facility,$item->get_facilities())){
+                    $res->forget($key);
+                }
+            }
 
+
+        }
         return SearchResource::collection($res);
     }
 

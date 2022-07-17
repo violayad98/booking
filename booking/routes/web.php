@@ -70,3 +70,4 @@ Route::get('/city',[\App\Http\Controllers\CityController::class,'index'])->name(
 Route::get('/type/meal', [App\Http\Controllers\TypeController::class, 'meal']);
 Route::get('/type/bed', [App\Http\Controllers\TypeController::class, 'bed']);
 Route::get('/type/property', [App\Http\Controllers\TypeController::class, 'property']);
+Route::get('/type/facilities', [App\Http\Controllers\TypeController::class, 'facilities']);

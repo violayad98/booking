@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeedbackTable extends Migration
+class CreateFacilitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateFeedbackTable extends Migration
      */
     public function up()
     {
-        Schema::create('feedback', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('reservation_id');
+        Schema::create('facilities', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
-            $table->decimal('grade', $precision = 8, $scale = 1);
-            $table->text('description');
 
-            $table->timestamps();
+        });
+        Schema::create('facilities_to_property', function (Blueprint $table) {
+            $table->bigInteger('property_id');
+            $table->bigInteger('facility_id');
+
         });
     }
 
@@ -31,6 +32,6 @@ class CreateFeedbackTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedback');
+        Schema::dropIfExists('facilities');
     }
 }

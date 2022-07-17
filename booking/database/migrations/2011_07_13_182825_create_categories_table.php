@@ -26,7 +26,6 @@ class CreateCategoriesTable extends Migration
             $table->Integer('bed_type')->nullable();
             $table->Integer('meal_type')->nullable();
             $table->integer('stars');
-
             $table->longText('description')->nullable();
 
             $table->timestamps();

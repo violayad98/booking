@@ -29,6 +29,7 @@ class ReservationController extends Controller
         $reservations = Reservation::select('reservations.*')->leftJoin('categories','categories.id','=','reservations.category_id')
             ->leftJoin('properties','categories.property_id','=','properties.id')->where('properties.owner_id',Auth::user()->id)
             ->orderBy('status', 'asc')
+            ->orderBy('id', 'desc')
             ->get();
         return view('reservation.list',['reservations'=> $reservations]);
     }
@@ -84,10 +85,10 @@ class ReservationController extends Controller
         $reservation->amount = $category->price_per_night*$diff;
         $reservation->status ='1';
         $reservation->person = $person;
-        //$reservation->save();
+        $reservation->save();
 
         $period = new DatePeriod( Carbon::parse($date_in), CarbonInterval::days(),  Carbon::parse($date_out));
-        print_r($period);
+
         foreach ($period as $day){
             $free=DB::table('desk_of_days')->select('free_room')
                 ->where('day',$day)
@@ -96,7 +97,6 @@ class ReservationController extends Controller
             $free1=DB::table('desk_of_days')
                 ->where('day',$day)
                 ->where('category_id',$id)->update(['free_room'=>$val]);
-            //echo $free1->free_room;
         }
         return redirect()->route('reservations')
             ->with('success', 'updated successfully');

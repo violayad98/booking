@@ -5249,22 +5249,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['contrdata'],
   data: function data() {
     return {
       hotels: [],
       fields: {},
+      facilities: null,
       meal: null,
       property: null,
       bed: null,
+      recalk: null,
       filter: {
         property_type: [],
         meal_type: [],
         bed_type: [],
         stars: [],
         grade: '',
-        sort: ''
+        sort: '',
+        price: '',
+        facilities_type: []
       }
     };
   },
@@ -5279,6 +5309,9 @@ __webpack_require__.r(__webpack_exports__);
     });
     axios.get('/type/bed').then(function (res) {
       _this.bed = res.data.data;
+    });
+    axios.get('/type/facilities').then(function (res) {
+      _this.facilities = res.data.data;
     });
     this.search();
   },
@@ -28084,9 +28117,12 @@ var render = function () {
                 attrs: { type: "radio", name: "sort", value: "1" },
                 domProps: { checked: _vm._q(_vm.filter.sort, "1") },
                 on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.filter, "sort", "1")
-                  },
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "sort", "1")
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28109,9 +28145,12 @@ var render = function () {
                 attrs: { type: "radio", name: "sort", value: "2" },
                 domProps: { checked: _vm._q(_vm.filter.sort, "2") },
                 on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.filter, "sort", "2")
-                  },
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "sort", "2")
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28134,34 +28173,12 @@ var render = function () {
                 attrs: { type: "radio", name: "sort", value: "3" },
                 domProps: { checked: _vm._q(_vm.filter.sort, "3") },
                 on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.filter, "sort", "3")
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("label", { staticClass: "form-check-label" }, [
-                _vm._v("Кількістю зірок"),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filter.sort,
-                    expression: "filter.sort",
-                  },
-                ],
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "sort", value: "4" },
-                domProps: { checked: _vm._q(_vm.filter.sort, "4") },
-                on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.filter, "sort", "4")
-                  },
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "sort", "3")
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28172,6 +28189,135 @@ var render = function () {
             _vm._v(" "),
             _c("h5", { staticClass: "text-center mt-4" }, [
               _vm._v("Фільтрувати за такими критеріями:"),
+            ]),
+            _vm._v(" "),
+            _c("legend", { staticClass: "mt-4" }, [_vm._v("Ціна за ніч")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.price,
+                    expression: "filter.price",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  value: "75",
+                  name: "price",
+                  id: "price",
+                },
+                domProps: { checked: _vm._q(_vm.filter.price, "75") },
+                on: {
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "price", "75")
+                    },
+                    _vm.search,
+                  ],
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("До 75₴"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.price,
+                    expression: "filter.price",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  value: "150",
+                  name: "price",
+                  id: "price",
+                },
+                domProps: { checked: _vm._q(_vm.filter.price, "150") },
+                on: {
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "price", "150")
+                    },
+                    _vm.search,
+                  ],
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("До 150₴"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.price,
+                    expression: "filter.price",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  value: "300",
+                  name: "price",
+                  id: "price",
+                },
+                domProps: { checked: _vm._q(_vm.filter.price, "300") },
+                on: {
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "price", "300")
+                    },
+                    _vm.search,
+                  ],
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("До 300₴"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.price,
+                    expression: "filter.price",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "radio", value: "", name: "price", id: "price" },
+                domProps: { checked: _vm._q(_vm.filter.price, "") },
+                on: {
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "price", "")
+                    },
+                    _vm.search,
+                  ],
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Будь-яка"),
+              ]),
             ]),
             _vm._v(" "),
             _c("legend", { staticClass: "mt-4" }, [_vm._v("Тип помешкання")]),
@@ -28200,32 +28346,35 @@ var render = function () {
                       : _vm.filter.property_type,
                   },
                   on: {
-                    change: function ($event) {
-                      var $$a = _vm.filter.property_type,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = val.id,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(
-                              _vm.filter,
-                              "property_type",
-                              $$a.concat([$$v])
-                            )
+                    change: [
+                      function ($event) {
+                        var $$a = _vm.filter.property_type,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = val.id,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.filter,
+                                "property_type",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.filter,
+                                "property_type",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
                         } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filter,
-                              "property_type",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
+                          _vm.$set(_vm.filter, "property_type", $$c)
                         }
-                      } else {
-                        _vm.$set(_vm.filter, "property_type", $$c)
-                      }
-                    },
+                      },
+                      _vm.search,
+                    ],
                   },
                 }),
                 _vm._v(" "),
@@ -28261,28 +28410,35 @@ var render = function () {
                       : _vm.filter.bed_type,
                   },
                   on: {
-                    change: function ($event) {
-                      var $$a = _vm.filter.bed_type,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = val1.id,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filter, "bed_type", $$a.concat([$$v]))
+                    change: [
+                      function ($event) {
+                        var $$a = _vm.filter.bed_type,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = val1.id,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.filter,
+                                "bed_type",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.filter,
+                                "bed_type",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
                         } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filter,
-                              "bed_type",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
+                          _vm.$set(_vm.filter, "bed_type", $$c)
                         }
-                      } else {
-                        _vm.$set(_vm.filter, "bed_type", $$c)
-                      }
-                    },
+                      },
+                      _vm.search,
+                    ],
                   },
                 }),
                 _vm._v(" "),
@@ -28318,33 +28474,104 @@ var render = function () {
                       : _vm.filter.meal_type,
                   },
                   on: {
-                    change: function ($event) {
-                      var $$a = _vm.filter.meal_type,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = val.id,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filter, "meal_type", $$a.concat([$$v]))
+                    change: [
+                      function ($event) {
+                        var $$a = _vm.filter.meal_type,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = val.id,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.filter,
+                                "meal_type",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.filter,
+                                "meal_type",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
                         } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filter,
-                              "meal_type",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
+                          _vm.$set(_vm.filter, "meal_type", $$c)
                         }
-                      } else {
-                        _vm.$set(_vm.filter, "meal_type", $$c)
-                      }
-                    },
+                      },
+                      _vm.search,
+                    ],
                   },
                 }),
                 _vm._v(" "),
                 _c("label", { staticClass: "form-check-label" }, [
                   _vm._v(_vm._s(val.name)),
+                ]),
+              ])
+            }),
+            _vm._v(" "),
+            _c("legend", { staticClass: "mt-4" }, [_vm._v("Зручності")]),
+            _vm._v(" "),
+            _vm._l(_vm.facilities, function (val1) {
+              return _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.filter.facilities_type,
+                      expression: "filter.facilities_type",
+                    },
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: {
+                    type: "checkbox",
+                    name: "bed_type",
+                    id: "flexCheckChecked",
+                  },
+                  domProps: {
+                    value: val1.id,
+                    checked: Array.isArray(_vm.filter.facilities_type)
+                      ? _vm._i(_vm.filter.facilities_type, val1.id) > -1
+                      : _vm.filter.facilities_type,
+                  },
+                  on: {
+                    change: [
+                      function ($event) {
+                        var $$a = _vm.filter.facilities_type,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = val1.id,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.filter,
+                                "facilities_type",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.filter,
+                                "facilities_type",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.filter, "facilities_type", $$c)
+                        }
+                      },
+                      _vm.search,
+                    ],
+                  },
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "form-check-label" }, [
+                  _vm._v(_vm._s(val1.name)),
                 ]),
               ])
             }),
@@ -28374,28 +28601,31 @@ var render = function () {
                     : _vm.filter.stars,
                 },
                 on: {
-                  change: function ($event) {
-                    var $$a = _vm.filter.stars,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = "1",
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 &&
-                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                  change: [
+                    function ($event) {
+                      var $$a = _vm.filter.stars,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "1",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.filter,
+                              "stars",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
                       } else {
-                        $$i > -1 &&
-                          _vm.$set(
-                            _vm.filter,
-                            "stars",
-                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                          )
+                        _vm.$set(_vm.filter, "stars", $$c)
                       }
-                    } else {
-                      _vm.$set(_vm.filter, "stars", $$c)
-                    }
-                  },
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28425,28 +28655,31 @@ var render = function () {
                     : _vm.filter.stars,
                 },
                 on: {
-                  change: function ($event) {
-                    var $$a = _vm.filter.stars,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = "2",
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 &&
-                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                  change: [
+                    function ($event) {
+                      var $$a = _vm.filter.stars,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "2",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.filter,
+                              "stars",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
                       } else {
-                        $$i > -1 &&
-                          _vm.$set(
-                            _vm.filter,
-                            "stars",
-                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                          )
+                        _vm.$set(_vm.filter, "stars", $$c)
                       }
-                    } else {
-                      _vm.$set(_vm.filter, "stars", $$c)
-                    }
-                  },
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28476,28 +28709,31 @@ var render = function () {
                     : _vm.filter.stars,
                 },
                 on: {
-                  change: function ($event) {
-                    var $$a = _vm.filter.stars,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = "3",
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 &&
-                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                  change: [
+                    function ($event) {
+                      var $$a = _vm.filter.stars,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "3",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.filter,
+                              "stars",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
                       } else {
-                        $$i > -1 &&
-                          _vm.$set(
-                            _vm.filter,
-                            "stars",
-                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                          )
+                        _vm.$set(_vm.filter, "stars", $$c)
                       }
-                    } else {
-                      _vm.$set(_vm.filter, "stars", $$c)
-                    }
-                  },
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28527,28 +28763,31 @@ var render = function () {
                     : _vm.filter.stars,
                 },
                 on: {
-                  change: function ($event) {
-                    var $$a = _vm.filter.stars,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = "4",
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 &&
-                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                  change: [
+                    function ($event) {
+                      var $$a = _vm.filter.stars,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "4",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.filter,
+                              "stars",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
                       } else {
-                        $$i > -1 &&
-                          _vm.$set(
-                            _vm.filter,
-                            "stars",
-                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                          )
+                        _vm.$set(_vm.filter, "stars", $$c)
                       }
-                    } else {
-                      _vm.$set(_vm.filter, "stars", $$c)
-                    }
-                  },
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28578,28 +28817,31 @@ var render = function () {
                     : _vm.filter.stars,
                 },
                 on: {
-                  change: function ($event) {
-                    var $$a = _vm.filter.stars,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = "5",
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 &&
-                          _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                  change: [
+                    function ($event) {
+                      var $$a = _vm.filter.stars,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "5",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.filter, "stars", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.filter,
+                              "stars",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
                       } else {
-                        $$i > -1 &&
-                          _vm.$set(
-                            _vm.filter,
-                            "stars",
-                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                          )
+                        _vm.$set(_vm.filter, "stars", $$c)
                       }
-                    } else {
-                      _vm.$set(_vm.filter, "stars", $$c)
-                    }
-                  },
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28624,9 +28866,12 @@ var render = function () {
                 attrs: { type: "radio", name: "grade", value: "9" },
                 domProps: { checked: _vm._q(_vm.filter.grade, "9") },
                 on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.filter, "grade", "9")
-                  },
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "grade", "9")
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28649,9 +28894,12 @@ var render = function () {
                 attrs: { type: "radio", name: "grade", value: "8" },
                 domProps: { checked: _vm._q(_vm.filter.grade, "8") },
                 on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.filter, "grade", "8")
-                  },
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "grade", "8")
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28674,9 +28922,12 @@ var render = function () {
                 attrs: { type: "radio", name: "grade", value: "7" },
                 domProps: { checked: _vm._q(_vm.filter.grade, "7") },
                 on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.filter, "grade", "7")
-                  },
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "grade", "7")
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28699,9 +28950,12 @@ var render = function () {
                 attrs: { type: "radio", name: "grade", value: "6" },
                 domProps: { checked: _vm._q(_vm.filter.grade, "6") },
                 on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.filter, "grade", "6")
-                  },
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "grade", "6")
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -28724,9 +28978,12 @@ var render = function () {
                 attrs: { type: "radio", name: "grade", value: "0" },
                 domProps: { checked: _vm._q(_vm.filter.grade, "0") },
                 on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.filter, "grade", "0")
-                  },
+                  change: [
+                    function ($event) {
+                      return _vm.$set(_vm.filter, "grade", "0")
+                    },
+                    _vm.search,
+                  ],
                 },
               }),
               _vm._v(" "),

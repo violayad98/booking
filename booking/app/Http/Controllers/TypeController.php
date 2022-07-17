@@ -46,4 +46,10 @@ class TypeController extends Controller
         return CityResource::collection($bed_types);
     }
 
+    public function facilities()
+    {
+
+        $facilities_types = DB::table('facilities')->get();
+        return CityResource::collection($facilities_types);
+    }
 }

@@ -14,6 +14,7 @@ class CreateDeskOfDaysTable extends Migration
     public function up()
     {
         Schema::create('desk_of_days', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('category_id');
             $table->date('day');
             $table->integer('free_room');
