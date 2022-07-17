@@ -1,6 +1,6 @@
 php version must be 7.2 and more
 
-1)Download Composer and Visual Studio Code and Wamp
+1)Download Composer and Visual Studio Code and Wamp(Windows)
 2)Download Zip File from Github and extract It or git clone ssh link
 3)Open Project In VSC and Open integrated terminal
 4)Run "composer update" "npm init" "npm install"
